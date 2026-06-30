@@ -18,6 +18,79 @@ Prioritize Inflight Entertainment & Cabin Experience: Since Inflight Entertainme
 ​Differentiate the Economy Experience: Traveling in Economy/Eco Plus or for Personal Travel strongly correlates with dissatisfaction. The airline needs to figure out what pain points exist specifically in the back of the aircraft (e.g., legroom, boarding priority) to narrow the satisfaction gap between business and leisure travelers.
 ​3. Model Limitations & Next Steps
 ​Before deployment, consider these constraints to communicate to stakeholders:
+
+Here is the complete, explicit calculation and business impact breakdown for my project documentation or final report.
+
+---
+
+## 1. Quantitative Evaluation: Formulas, Metrics, & Definitions
+
+To evaluate a binary classification model completely, we look beyond raw accuracy to examine the precise alignment of our predictions using the values from the model's confusion matrix.
+
+### Core Formulas & Exact Definitions
+
+#### A. Accuracy (Overall Correctness)
+
+* **Mathematical Formula:**
+
+$$\text{Accuracy} = \frac{\text{True Positives (TP)} + \text{True Negatives (TN)}}{\text{True Positives (TP)} + \text{True Negatives (TN)} + \text{False Positives (FP)} + \text{False Negatives (FN)}}$$
+
+
+* **Definition:** The ratio of total correct predictions (both passengers who were correctly predicted as satisfied and those correctly predicted as dissatisfied) to the total number of passengers evaluated. It provides a quick, high-level look at global model performance.
+
+#### B. Precision (Quality of Positive Predictions)
+
+* **Mathematical Formula:**
+
+$$\text{Precision} = \frac{\text{True Positives (TP)}}{\text{True Positives (TP)} + \text{False Positives (FP)}}$$
+
+
+* **Definition:** Out of all the passengers the model *predicted* would be "Satisfied", Precision measures the percentage who actually were satisfied. It captures the exact reliability of your positive flags and directly quantifies the rate of False Positives.
+
+#### C. Recall / Sensitivity (Coverage of the Satisfied Customer Base)
+
+* **Mathematical Formula:**
+
+$$\text{Recall} = \frac{\text{True Positives (TP)}}{\text{True Positives (TP)} + \text{False Negatives (FN)}}$$
+
+
+* **Definition:** Out of all the passengers in the dataset who were *actually* "Satisfied", Recall measures the percentage the model successfully captured. This metric is critical for tracking False Negatives (satisfied customers whom the model completely overlooked).
+
+#### D. $F_1\text{-Score}$ (Balanced Harmonic Performance)
+
+* **Mathematical Formula:**
+
+$$F_1\text{-Score} = 2 \times \frac{\text{Precision} \times \text{Recall}}{\text{Precision} + \text{Recall}}$$
+
+
+* **Definition:** The harmonic mean of Precision and Recall. Unlike standard averages, the harmonic mean penalizes extreme imbalances (e.g., a model with 99% precision but 10% recall will have a terrible $F_1\text{-score}$). It serves as a unified, robust health check for the classifier.
+
+---
+
+## 2. Business Impact Analysis: False Negatives vs. False Positives
+
+In airline operations, classification errors are not just mathematical numbers—they carry distinct operational and financial consequences. Balancing these errors requires understanding the exact business trade-offs.
+
+### The Operational Consequences of Both Errors
+
+* **The Impact of a False Positive (Type I Error):**
+* *What happens:* The model flags an actually **satisfied** passenger as **unhappy**.
+* *The Business Cost:* This results in **wasted capital and operational inefficiency**. If the automated customer experience pipeline flags a content flyer as dissatisfied, the airline might spend budget proactively reaching out with loyalty points, seat upgrade vouchers, or apology emails to a customer who was already completely happy and planning to book again.
+
+
+* **The Impact of a False Negative (Type II Error):**
+* *What happens:* The model flags an actually **dissatisfied** passenger as **happy** (ignoring them).
+* *The Business Cost:* This is a **silent revenue killer**. When a genuinely frustrated customer is incorrectly flagged as satisfied, they slip through the system entirely unnoticed. They receive no customer recovery outreach, no apology, and no retention incentives. This drastically increases customer churn, drives passengers straight to competitors, and results in negative word-of-mouth or poor public reviews.
+
+
+
+### The Verdict: Which is Worse?
+
+For an airline, **it is significantly worse to ignore a dissatisfied customer (False Negative) than to misidentify a satisfied one as unhappy (False Positive).**
+
+Wasting a retention voucher or a customer service email on an already happy passenger (False Positive) is a minor, absorbable operational cost that might even inadvertently boost their loyalty further. However, completely ignoring an angry customer (False Negative) results in permanent customer churn and lost lifetime value, which directly damages long-term top-line revenue.
+
+**Strategic Next Step:** Because False Negatives carry a much steeper penalty, the airline should consciously tune the Logistic Regression classification threshold to prioritize a higher **Recall** score, ensuring that as many dissatisfied passengers are caught and retained as possible.
 ​Survey Subjectivity: Survey responses (1-5 scales) are inherently subjective. What one passenger considers "3-star seat comfort," another might consider "4-star."
 ​Multicollinearity: Features like Departure Delay and Arrival Delay are highly correlated. While the model handles them, collinear features can sometimes make individual coefficients bounce around or behave counterintuitively (like the slight positive coefficient for departure delay).
 ​Deployment Next Steps: To deploy this model, save the pipeline (including the StandardScaler weights and the LogisticRegression coefficients) using a library like pickle or joblib. This allows the airline's backend infrastructure to score passenger satisfaction probabilities in real-time as they complete flights.
