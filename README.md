@@ -20,24 +20,3 @@ Prioritize Inflight Entertainment & Cabin Experience: Since Inflight Entertainme
 ​Survey Subjectivity: Survey responses (1-5 scales) are inherently subjective. What one passenger considers "3-star seat comfort," another might consider "4-star."
 ​Multicollinearity: Features like Departure Delay and Arrival Delay are highly correlated. While the model handles them, collinear features can sometimes make individual coefficients bounce around or behave counterintuitively (like the slight positive coefficient for departure delay).
 ​Deployment Next Steps: To deploy this model, save the pipeline (including the StandardScaler weights and the LogisticRegression coefficients) using a library like pickle or joblib. This allows the airline's backend infrastructure to score passenger satisfaction probabilities in real-time as they complete flights.
-
-### Model Performance Metrics & Confusion Matrix
-While interpreting individual feature coefficients reveals *what* drives passenger satisfaction, evaluating the global performance metrics is crucial to understanding *how accurately* the model predicts those outcomes.
-Below is the evaluation summary of the Logistic Regression model on the unseen testing dataset:
-#### 1. Global Performance Metrics
- * **Accuracy:** Measures the overall percentage of correct predictions (both satisfied and dissatisfied passengers).
- * **Precision:** Out of all passengers the model predicted as "Satisfied", this measures how many were actually satisfied. It quantifies the cost of False Positives (e.g., targeting a dissatisfied customer as if they were happy).
- * **Recall (Sensitivity):** Out of all actual "Satisfied" passengers in the dataset, this measures how many the model successfully captured. It quantifies the cost of False Negatives (e.g., missing a satisfied customer entirely).
-#### 2. The Confusion Matrix Breakdown
-The confusion matrix provides a pixel-perfect look at the True vs. Predicted classifications, mapping out the direct trade-offs of the binomial classifier:
-
-|  | Predicted: Dissatisfied (0) | Predicted: Satisfied (1) |
-| :--- | :--- | :--- |
-| **True: Dissatisfied (0)** | **True Negatives (TN)** <br> *(Correctly identified unhappy passengers)* | **False Positives (FP)** <br> *(Type I Error: Predicted happy, but actually unhappy)* |
-| **True: Satisfied (1)** | **False Negatives (FN)** <br> *(Type II Error: Predicted unhappy, but actually happy)* | **True Positives (TP)** <br> *(Correctly identified happy passengers)* |
-
-### Technical Synthesis
-By looking at the Confusion Matrix alongside the coefficients, the business value becomes actionable:
- * **High Recall** ensures the airline minimizes False Negatives, meaning operational teams won't mistakenly overlook passengers who are genuinely happy with their current services.
-   High Precision safeguards marketing initiatives, ensuring that loyalty retention or upgrade strategies are directed accurately toward the right passenger segments.
-Does your specific assignment prompt ask you to paste your actual numerical values for Accuracy, Precision, and Recall into this section?
