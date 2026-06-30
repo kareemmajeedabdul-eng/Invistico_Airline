@@ -1,3 +1,4 @@
+<img width="527" height="393" alt="Confusion matrix" src="https://github.com/user-attachments/assets/2266a79a-7d96-41f6-b638-f365ba4a7015" />
 Based on the coefficients and odds ratios, the model has provided distinct clues about what truly drives passenger satisfaction. Here is the comprehensive project interpretation and business breakdown.
 ​1. Interpretation of Key Drivers (Coefficients & Odds Ratios)
 ​In Logistic Regression, positive coefficients (and Odds Ratios > 1) increase the likelihood of a passenger being satisfied. Negative coefficients (and Odds Ratios < 1) heavily drag down satisfaction. Because you scaled your continuous features, we can compare these impacts directly.
